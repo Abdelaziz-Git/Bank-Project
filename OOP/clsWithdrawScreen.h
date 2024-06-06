@@ -10,8 +10,9 @@ class clsWithdrawScreen:protected clsScreen
     static string _ReadAccountNumber() {
         cout << "\nPlease enter account number? ";
         return clsInputValidate::ReadString();
-    }
-    static void _PrintClient(clsBankClient Client) {
+}
+static void _PrintClient(clsBankClient Client)
+{
         cout << "\nClient card:";
         cout << "\n________________________________________\n";
         cout << "\nFirst name    :" << Client.FirstName;
