@@ -10,9 +10,10 @@ class clsWithdrawScreen:protected clsScreen
     static string _ReadAccountNumber() {
         cout << "\nPlease enter account number? ";
         return clsInputValidate::ReadString();
-}
-static void _PrintClient(clsBankClient Client)
-{
+    }
+
+    static void _PrintClient(clsBankClient Client)
+    {
         cout << "\nClient card:";
         cout << "\n________________________________________\n";
         cout << "\nFirst name    :" << Client.FirstName;
@@ -52,6 +53,7 @@ public:
                 cout << "\nCannot withdraw, insuffecient balance!";
                 cout << "\nAmount to withdraw is " << Amount;
                 cout << "\nYour balance is: " << Client1.AccountBalance;
+                //Hello
             }
         }
     }
