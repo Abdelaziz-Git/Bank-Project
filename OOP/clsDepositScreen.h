@@ -2,7 +2,7 @@
 #include<iostream>
 #include<iomanip>
 #include"clsScreen.h";
-#include"clsBankClient.h";
+#include"clsClient.h";
 #include"clsInputValidate.h";
 using namespace std;
 class clsDepositScreen:protected clsScreen
@@ -11,7 +11,7 @@ class clsDepositScreen:protected clsScreen
 		cout << "\nPlease enter account number? ";
 		return clsInputValidate::ReadString();
 	}
-    static void _PrintClient(clsBankClient Client) {
+    static void _PrintClient(clsClient Client) {
         cout << "\nClient card:";
         cout << "\n________________________________________\n";
         cout << "\nFirst name    :" << Client.FirstName;
@@ -30,11 +30,11 @@ public:
 	static void ShowDepositScreen() {
         clsScreen::_DrawScreenHeader("Deposit screen");
         string AccountNumber = _ReadAccountNumber();
-        while (!clsBankClient::IsClientExist(AccountNumber)) {
+        while (!clsClient::IsClientExist(AccountNumber)) {
             cout << "\nClient with [" << AccountNumber << "] is not exist, please enter another one: ";
             AccountNumber = _ReadAccountNumber();
         }
-        clsBankClient Client1 = clsBankClient::Find(AccountNumber);
+        clsClient Client1 = clsClient::Find(AccountNumber);
         _PrintClient(Client1);
         double Amount = 0;
         cout << "\nPlease enter deposit amount? ";

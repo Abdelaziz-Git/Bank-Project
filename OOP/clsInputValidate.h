@@ -4,7 +4,6 @@
 #include "clsDate.h";
 using namespace std;
 
-
 class clsInputValidate
 {
 public:

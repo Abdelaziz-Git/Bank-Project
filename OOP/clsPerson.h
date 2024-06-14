@@ -1,9 +1,10 @@
 #pragma once
 #include <iostream>
 #include <string>
+#include"InterfaceCommunication.h";
 using namespace std;
 
-class clsPerson
+class clsPerson:public InterfaceCommunication
 {
 
 private:
@@ -81,16 +82,16 @@ public:
         return _FirstName + " " + _LastName;
     }
 
-    void Print()
+    void SendEmail(string Title, string Body)
     {
-        cout << "\nInfo:";
-        cout << "\n___________________";
-        cout << "\nFirstName: " << _FirstName;
-        cout << "\nLastName : " << _LastName;
-        cout << "\nFull Name: " << FullName();
-        cout << "\nEmail    : " << _Email;
-        cout << "\nPhone    : " << _Phone;
-        cout << "\n___________________\n";
+
+    }
+    void SendFax(string Title, string Body)
+    {
+
+    }
+    void SendSMS(string Title, string Body)
+    {
 
     }
 

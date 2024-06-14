@@ -2,13 +2,13 @@
 #include<iostream>
 #include<iomanip>
 #include"clsScreen.h";
-#include"clsBankClient.h";
+#include"clsClient.h";
 #include"clsInputValidate.h";
 using namespace std;
 
 class clsAddNewClientScreen:protected clsScreen
 {
-    static void _ReadClientInfo(clsBankClient& Client) {
+    static void _ReadClientInfo(clsClient& Client) {
 
         cout << "-------------------------------------";
         cout << "\nPlease enter first name: ";
@@ -31,7 +31,7 @@ class clsAddNewClientScreen:protected clsScreen
         cout << "\n-------------------------------------\n";
 
     }
-    static void _PrintClient(clsBankClient Client)
+    static void _PrintClient(clsClient Client)
     {
         cout << "\nClient card:";
         cout << "\n________________________________________\n";
@@ -55,27 +55,27 @@ public:
         string AccountNumber;
         cout << "\nPlease enter account number ? ";
         AccountNumber = clsInputValidate::ReadString();
-        while (clsBankClient::IsClientExist(AccountNumber)) {
+        while (clsClient::IsClientExist(AccountNumber)) {
             cout << "\nAccount number is already exist, choose another one: ";
             AccountNumber = clsInputValidate::ReadString();
         }
 
-        clsBankClient NewClient = clsBankClient::GetAddNewClientObject(AccountNumber);
+        clsClient NewClient = clsClient::GetAddNewClientObject(AccountNumber);
         cout << "\nAdd new client Info:\n";
         _ReadClientInfo(NewClient);
-        clsBankClient::enSaveResults SaveResults;
+        clsClient::enSaveResults SaveResults;
 
         SaveResults = NewClient.Save();
         switch (SaveResults)
         {
-        case clsBankClient::svFaildEmptyObject:
+        case clsClient::svFaildEmptyObject:
             cout << "\nError client is not added becouse object is empty.\n";
             break;
-        case clsBankClient::svSucceeded:
+        case clsClient::svSucceeded:
             cout << "\nClient is added succssfully.";
             _PrintClient(NewClient);
             break;
-        case clsBankClient::svFaildAccountNumberExist:
+        case clsClient::svFaildAccountNumberExist:
             cout << "\nError client is not added becouse account number choosed is exist.\n";
             break;
 

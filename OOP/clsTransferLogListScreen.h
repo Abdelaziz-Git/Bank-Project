@@ -2,7 +2,7 @@
 #include<iostream>
 #include<iomanip>
 #include"clsScreen.h";
-#include"clsBankClient.h";
+#include"clsClient.h";
 class clsTransferLogListScreen:protected clsScreen
 {
 	static void _PrintTransferLogListTableHeader()
@@ -19,7 +19,7 @@ class clsTransferLogListScreen:protected clsScreen
 		cout << "\n^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^"
 			<< "^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n";
 	}
-	static void _PrintTransferLogRecord(clsBankClient::stTransferLogRecord TransferLogRecord)
+	static void _PrintTransferLogRecord(clsClient::stTransferLogRecord TransferLogRecord)
 	{
 		cout << "| " << setw(20) << left << TransferLogRecord.DateTime;
 		cout << "| " << setw(16) << left << TransferLogRecord.SourceClientAccNumber;
@@ -32,8 +32,8 @@ class clsTransferLogListScreen:protected clsScreen
 public:
 	static void ShowTransferLogListScreen()
 	{
-		vector<clsBankClient::stTransferLogRecord>vTransfersLogRecords;
-		vTransfersLogRecords = clsBankClient::GetTransferLogList();
+		vector<clsClient::stTransferLogRecord>vTransfersLogRecords;
+		vTransfersLogRecords = clsClient::GetTransferLogList();
 		string Title = "Transfer log list screen";
 		string SubTitle = "( " + to_string(vTransfersLogRecords.size()) + ") Record(s).";
 		clsScreen::_DrawScreenHeader(Title, SubTitle);
@@ -45,7 +45,7 @@ public:
 		}
 		else
 		{
-			for (clsBankClient::stTransferLogRecord& TransferLogRecord : vTransfersLogRecords)
+			for (clsClient::stTransferLogRecord& TransferLogRecord : vTransfersLogRecords)
 			{
 				_PrintTransferLogRecord(TransferLogRecord);
 				cout << endl;

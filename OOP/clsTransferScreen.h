@@ -1,10 +1,10 @@
 #pragma once
-#include"clsBankClient.h";
+#include"clsClient.h";
 #include"clsScreen.h";
 #include"clsInputValidate.h";
 class clsTransferScreen:protected clsScreen
 {
-	static void _PrintClientCard(clsBankClient Client) {
+	static void _PrintClientCard(clsClient Client) {
 		cout << "\nClient card";
 		cout << "\n************************************";
 		cout << "\nFull name: " << Client.FullName();
@@ -17,14 +17,14 @@ class clsTransferScreen:protected clsScreen
 		string AccountNumber;
 		cout << Message;
 		AccountNumber = clsInputValidate::ReadString();
-		while (!clsBankClient::IsClientExist(AccountNumber))
+		while (!clsClient::IsClientExist(AccountNumber))
 		{
 			cout << "\nAccount number is not found, choose another one: ";
 			AccountNumber = clsInputValidate::ReadString();
 		}
 		return AccountNumber;
 	}
-	static double _ReadAmount(clsBankClient SourceClient)
+	static double _ReadAmount(clsClient SourceClient)
 	{
 		double TransferAmount;
 		cout << "\n\nEnter transfer amount: ";
@@ -43,12 +43,12 @@ public:
 		clsScreen::_DrawScreenHeader("     Transfer screen");
 
 		//Client transfer from
-		clsBankClient SourceClient = clsBankClient::
+		clsClient SourceClient = clsClient::
 			Find(_ReadAccountNumber("\nPlease enter client account number to transfer From: "));
 		_PrintClientCard(SourceClient);
 
 		//Client transfer To
-		clsBankClient DestinationClient = clsBankClient::
+		clsClient DestinationClient = clsClient::
 			Find(_ReadAccountNumber("\nPlease enter client account number to transfer From: "));
 		_PrintClientCard(DestinationClient);
 

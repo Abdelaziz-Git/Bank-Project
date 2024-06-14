@@ -2,7 +2,7 @@
 #include<iostream>
 #include<iomanip>
 #include"clsScreen.h";
-#include"clsBankClient.h";
+#include"clsClient.h";
 #include"clsInputValidate.h";
 
 class clsWithdrawScreen:protected clsScreen
@@ -12,7 +12,7 @@ class clsWithdrawScreen:protected clsScreen
         return clsInputValidate::ReadString();
     }
 
-    static void _PrintClient(clsBankClient Client)
+    static void _PrintClient(clsClient Client)
     {
         cout << "\nClient card:";
         cout << "\n________________________________________\n";
@@ -30,11 +30,11 @@ public:
     static void ShowWithdrawScreen() {
         clsScreen::_DrawScreenHeader("Withdraw screen");
         string AccountNumber = _ReadAccountNumber();
-        while (!clsBankClient::IsClientExist(AccountNumber)) {
+        while (!clsClient::IsClientExist(AccountNumber)) {
             cout << "\nClient with [" << AccountNumber << "] is not exist, please enter another one: ";
             AccountNumber = _ReadAccountNumber();
         }
-        clsBankClient Client1 = clsBankClient::Find(AccountNumber);
+        clsClient Client1 = clsClient::Find(AccountNumber);
         _PrintClient(Client1);
 
         double Amount = 0;

@@ -2,13 +2,13 @@
 #include<iostream>
 #include<iomanip>
 #include"clsScreen.h";
-#include"clsBankClient.h";
+#include"clsClient.h";
 #include"clsInputValidate.h";
 using namespace std;
 
 class clsUpdateClientScreen:protected clsScreen
 {
-    static void _ReadClientInfo(clsBankClient& Client,short Choise) {
+    static void _ReadClientInfo(clsClient& Client,short Choise) {
         cout << "-------------------------------------";
         switch (Choise)
         {
@@ -41,7 +41,7 @@ class clsUpdateClientScreen:protected clsScreen
         cout << "-------------------------------------\n";
 
     }
-    static void _PrintClient(clsBankClient Client) {
+    static void _PrintClient(clsClient Client) {
         cout << "\nClient card:";
         cout << "\n________________________________________\n";
         cout << "\nFirst name    :" << Client.FirstName;
@@ -74,14 +74,14 @@ public:
         cout << "\nPlease enter client account number: ";
         AccountNumber = clsInputValidate::ReadString();
 
-        while (!clsBankClient::IsClientExist(AccountNumber))
+        while (!clsClient::IsClientExist(AccountNumber))
         {
             cout << "\nAccount number is not found, choose another one: ";
             AccountNumber = clsInputValidate::ReadString();
         }
 
         cout << "\nAccount number is found successfully -):\n";
-        clsBankClient Client = clsBankClient::Find(AccountNumber);
+        clsClient Client = clsClient::Find(AccountNumber);
         _PrintClient(Client);
 
         cout << "\nAre you sure do you want update this client! Y/N? ";
@@ -95,14 +95,14 @@ public:
             cout << "\nUpdate client Info:\n";
             _ReadClientInfo(Client, Choice);
 
-            clsBankClient::enSaveResults SaveResults;
+            clsClient::enSaveResults SaveResults;
             SaveResults = Client.Save();
             switch (SaveResults)
             {
-            case clsBankClient::svFaildEmptyObject:
+            case clsClient::svFaildEmptyObject:
                 cout << "\nError account is not saved becouse object is empty!\n";
                 break;
-            case clsBankClient::svSucceeded:
+            case clsClient::svSucceeded:
                 cout << "\nAccount updated successfully :-).\n";
                 _PrintClient(Client);
                 break;

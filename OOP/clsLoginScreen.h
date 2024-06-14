@@ -6,6 +6,7 @@
 #include"clsInputValidate.h";
 #include"Global.h";
 #include"clsMainScreen.h";
+#include"clsUtil.h";
 using namespace std;
 
 class clsLoginScreen:protected clsScreen
@@ -28,6 +29,7 @@ class clsLoginScreen:protected clsScreen
 			UserName = clsInputValidate::ReadString();
 			cout << "\nEnter Password: ";
 		    Password = clsInputValidate::ReadString();
+
 			CurrentUser = clsUser::Find(UserName, Password);
 			LoginFail = CurrentUser.IsEmpty();
 			

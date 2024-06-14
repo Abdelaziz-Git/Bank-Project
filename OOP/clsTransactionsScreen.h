@@ -2,7 +2,7 @@
 #include<iostream>
 #include<iomanip>
 #include"clsScreen.h";
-#include"clsBankClient.h";
+#include"clsClient.h";
 #include"clsInputValidate.h";
 #include"clsMainScreen.h";
 #include"clsDepositScreen.h";

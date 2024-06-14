@@ -31,7 +31,7 @@ public:
 		return Number == ReverseNumbers(Number);
 		// 12321 == 12321 ? true , ( 1234 == 4321 ? false )
 	}
-	static string EncryptText(string Text, short EncryptionKey)
+	static string EncryptText(string Text, short EncryptionKey=15)
 	{
 		// Text = Saeed
 		// EncryptionKey = 2 
@@ -41,7 +41,7 @@ public:
 		}
 		return Text; // Ucggf
     }
-    static string DecryptText(string Text, short EncryptionKey)
+    static string DecryptText(string Text, short EncryptionKey=15)
     {
 		for (int i = 0; i <= Text.length(); i++)
 		{

@@ -5,6 +5,7 @@
 #include"clsPerson.h";
 #include"clsString.h";
 #include"clsDate.h";
+#include"clsUtil.h";
 
 const string FileUser = "Users.txt";
 const string FileLogin = "LoginRegister.txt";
@@ -19,10 +20,11 @@ private:
 	int _Permissions;
 	bool _MarkForDeleted = false;
 
-	static clsUser _ConvertLineToUserObject(string Line) {
+	static clsUser _ConvertLineToUserObject(string Line) 
+	{
 		vector<string>vUser = clsString::Split(Line);
-		return clsUser(enMode::UpdateMode, vUser[0], vUser[1], vUser[2], vUser[3], vUser[4], vUser[5],
-			stoi(vUser[6]));
+		return clsUser(enMode::UpdateMode, vUser[0], vUser[1], vUser[2], vUser[3], vUser[4],
+			clsUtil::DecryptText(vUser[5]), stoi(vUser[6]));
 	}
 	static clsUser _GetEmptyObject() {
 		return clsUser(enMode::EmptyMode, "", "", "", "", "", "", 0);
@@ -34,7 +36,7 @@ private:
 		Line += User.Email + "#//#";
 		Line += User.Phone + "#//#";
 		Line += User.UserName + "#//#";
-		Line += User.Password + "#//#";
+		Line += clsUtil::EncryptText(User.Password) + "#//#";
 		Line += to_string(User.Permissions);
 		return Line;
 	}
@@ -88,12 +90,13 @@ private:
 		_SaveUsersDataToFile(vUsers);
 
 	}
-	string _ConvertDataLoginToDataLine(string Seperator="#//#") {
+	string _ConvertDataLoginToDataLine(string Seperator="#//#") 
+	{
 		clsDate Date;
 		string DataLoginLine = "";
 		DataLoginLine = Date.DateToString() + " - " + Date.PrintSystemTime() + Seperator;
 		DataLoginLine += UserName + Seperator;
-		DataLoginLine += Password + Seperator;
+		DataLoginLine += clsUtil::EncryptText(Password) + Seperator;
 		DataLoginLine += to_string(Permissions);
 		return DataLoginLine;
 	}
@@ -106,12 +109,13 @@ private:
 		}
 	}
 	struct stLoginRegisterRecord;
-	static stLoginRegisterRecord _ConvertLoginRegisterLineToRecord(string Line,string Seperator="#//#") {
+	static stLoginRegisterRecord _ConvertLoginRegisterLineToRecord(string Line,string Seperator="#//#") 
+	{
 		vector<string>vLoginRegisterDataLine = clsString::Split(Line, Seperator);
 		stLoginRegisterRecord LoginRegisterRecord;
 		LoginRegisterRecord.DateTime = vLoginRegisterDataLine[0];
 		LoginRegisterRecord.UserName = vLoginRegisterDataLine[1];
-		LoginRegisterRecord.Password = vLoginRegisterDataLine[2];
+		LoginRegisterRecord.Password = clsUtil::DecryptText(vLoginRegisterDataLine[2]);
 		LoginRegisterRecord.Permissions = stoi(vLoginRegisterDataLine[0]);
 		return LoginRegisterRecord;
 	}
@@ -131,7 +135,6 @@ public:
 		string Password = "";
 		short Permissions = 0;
 	};
-
 
 	bool IsEmpty() {
 		return (_Mode == enMode::EmptyMode);

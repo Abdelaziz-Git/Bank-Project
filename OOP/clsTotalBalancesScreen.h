@@ -2,13 +2,13 @@
 #include<iostream>
 #include<iomanip>
 #include"clsScreen.h";
-#include"clsBankClient.h";
+#include"clsClient.h";
 #include"clsInputValidate.h";
 #include"clsUtil.h";
 using namespace std;
 class clsTotalBalancesScreen:protected clsScreen
 {
-    static void _PrintClientRecordBalanceLine(clsBankClient Client)
+    static void _PrintClientRecordBalanceLine(clsClient Client)
     {
 
         cout << "| " << setw(15) << left << Client.AccountNumber();
@@ -21,7 +21,7 @@ public:
     static void ShowTotalBalancesScreen()
     {
         clsScreen::_DrawScreenHeader("Total balances screen");
-        vector <clsBankClient> vClients = clsBankClient::GetClientsList();
+        vector <clsClient> vClients = clsClient::GetClientsList();
         cout << "\n\t\tBalances list (" << vClients.size() << ") Client(s).";
         cout << "\n_______________________________________________________";
         cout << "_________\n" << endl;
@@ -37,7 +37,7 @@ public:
             cout << "\t\t\t\tNo Clients Available In the System!";
         }
         else {
-            for (clsBankClient Client : vClients) {
+            for (clsClient Client : vClients) {
 
                 _PrintClientRecordBalanceLine(Client);
                 cout << endl;
@@ -45,7 +45,7 @@ public:
         }
         cout << "_______________________________________________________";
         cout << "_________\n" << endl;
-        double TotalBalances = clsBankClient::GetTotalBalances();
+        double TotalBalances = clsClient::GetTotalBalances();
         cout << "Total balances = " << TotalBalances;
         cout << "\n(" << clsUtil::NumberToText(TotalBalances) << ")";
 
